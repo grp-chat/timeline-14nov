@@ -1,0 +1,563 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Performance Night | Coach Andrew</title>
+
+<style>
+:root {
+  --bg: #0b1020;
+  --panel: #151d31;
+  --panel2: #1b2740;
+  --text: #f1f5ff;
+  --muted: #94a3b8;
+  --blue: #3195ff;
+  --red: #ff5268;
+  --gold: #ffc857;
+  --green: #38d99a;
+  --line: #33415c;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Arial, sans-serif;
+  padding: 24px 16px 50px;
+}
+
+.container {
+  max-width: 760px;
+  margin: auto;
+}
+
+.header {
+  text-align: center;
+  padding: 22px 10px 28px;
+}
+
+.eyebrow {
+  color: var(--gold);
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+h1 {
+  font-size: clamp(25px, 6vw, 38px);
+  margin: 12px 0 8px;
+  font-weight: 900;
+}
+
+.subtitle {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.clock-card {
+  background: linear-gradient(135deg, #1c3152, #172039);
+  border: 1px solid #344d72;
+  border-radius: 18px;
+  padding: 23px;
+  text-align: center;
+  margin-bottom: 22px;
+}
+
+.clock-label {
+  color: #a9c8ef;
+  font-size: 12px;
+  letter-spacing: 2px;
+  font-weight: bold;
+}
+
+#clock {
+  font-size: clamp(36px, 10vw, 54px);
+  font-weight: 900;
+  margin: 8px 0;
+  font-variant-numeric: tabular-nums;
+}
+
+#dateDisplay {
+  color: #b7c6dc;
+  font-size: 13px;
+}
+
+.status-card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 18px;
+  margin-bottom: 30px;
+}
+
+.status-label {
+  color: var(--gold);
+  font-size: 11px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  margin-bottom: 9px;
+}
+
+#currentActivity {
+  font-size: 19px;
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+
+#statusDescription {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.section-heading {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 30px 0 16px;
+}
+
+.section-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 11px;
+  display: grid;
+  place-items: center;
+  font-size: 19px;
+  flex-shrink: 0;
+}
+
+.puay-icon { background: #173e68; }
+.subang-icon { background: #54212c; }
+.return-icon { background: #4a3916; }
+
+.section-heading h2 {
+  font-size: 17px;
+  margin: 0;
+}
+
+.section-heading p {
+  color: var(--muted);
+  font-size: 11px;
+  margin: 4px 0 0;
+}
+
+.timeline {
+  position: relative;
+  margin-left: 17px;
+  padding-left: 26px;
+  border-left: 2px solid var(--line);
+}
+
+.event {
+  position: relative;
+  background: var(--panel);
+  border: 1px solid #26344d;
+  border-radius: 13px;
+  padding: 16px;
+  margin-bottom: 13px;
+  transition: border-color .2s, background .2s;
+}
+
+.event::before {
+  content: "";
+  position: absolute;
+  left: -34px;
+  top: 21px;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: #64748b;
+  border: 3px solid var(--bg);
+}
+
+.event.active {
+  border-color: var(--gold);
+  background: #292a2b;
+}
+
+.event.active::before {
+  background: var(--gold);
+  box-shadow: 0 0 12px var(--gold);
+}
+
+.event.next {
+  border-color: var(--blue);
+}
+
+.event.next::before {
+  background: var(--blue);
+}
+
+.event.done {
+  opacity: .55;
+}
+
+.event-time {
+  color: var(--gold);
+  font-size: 14px;
+  font-weight: 800;
+  margin-bottom: 7px;
+  font-variant-numeric: tabular-nums;
+}
+
+.event-title {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+
+.event-desc {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.event-tag {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  margin-top: 10px;
+  padding: 5px 8px;
+  border-radius: 5px;
+  background: #26344d;
+  color: #b9c9e2;
+}
+
+.event.active .event-tag {
+  background: #66501f;
+  color: #ffe19a;
+}
+
+.event.next .event-tag {
+  background: #183c63;
+  color: #9bceff;
+}
+
+.warning {
+  background: #30271b;
+  border: 1px solid #66502c;
+  border-radius: 13px;
+  padding: 17px;
+  margin-top: 25px;
+}
+
+.warning h3 {
+  color: var(--gold);
+  font-size: 14px;
+  margin: 0 0 12px;
+}
+
+.warning p {
+  font-size: 13px;
+  color: #d4c7ae;
+  line-height: 1.6;
+  margin: 8px 0;
+}
+
+.footer {
+  text-align: center;
+  color: #64748b;
+  font-size: 11px;
+  margin-top: 35px;
+  letter-spacing: 1px;
+}
+
+@media (max-width: 480px) {
+  body {
+    padding: 12px 12px 35px;
+  }
+
+  .header {
+    padding-top: 17px;
+  }
+
+  .clock-card {
+    padding: 20px 12px;
+  }
+
+  .event {
+    padding: 14px;
+  }
+
+  .event-title {
+    font-size: 15px;
+  }
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+  <header class="header">
+    <div class="eyebrow">Coach Andrew Presents</div>
+    <h1>PERFORMANCE NIGHT</h1>
+    <div class="subtitle">Two Schools. Two Performances. One Busy Night.</div>
+  </header>
+
+  <div class="clock-card">
+    <div class="clock-label">LIVE LOCAL TIME</div>
+    <div id="clock">--:--:--</div>
+    <div id="dateDisplay">Saturday, 14 November 2026</div>
+  </div>
+
+  <div class="status-card">
+    <div class="status-label">LIVE SCHEDULE STATUS</div>
+    <div id="currentActivity">Getting ready...</div>
+    <div id="statusDescription">Your performance night timeline.</div>
+  </div>
+
+  <!-- PUAY CHAI PREPARATION -->
+
+  <div class="section-heading">
+    <div class="section-icon puay-icon">🏫</div>
+    <div>
+      <h2>SJK(C) PUAY CHAI</h2>
+      <p>FIRST VISIT · PREPARATION</p>
+    </div>
+  </div>
+
+  <div class="timeline">
+
+    <div class="event" data-start="15:00" data-end="15:30">
+      <div class="event-time">3:00 PM</div>
+      <div class="event-title">Travel to Puay Chai</div>
+      <div class="event-desc">Depart for SJK(C) Puay Chai.</div>
+    </div>
+
+    <div class="event" data-start="15:30" data-end="16:00">
+      <div class="event-time">3:30 PM</div>
+      <div class="event-title">Check Stage Markers</div>
+      <div class="event-desc">Inspect the markers on stage.</div>
+    </div>
+
+    <div class="event" data-start="16:00" data-end="16:30">
+      <div class="event-time">4:00 PM</div>
+      <div class="event-title">Brief TYY & STE</div>
+      <div class="event-desc">Explain and brief them on the swap arrangement.</div>
+    </div>
+
+    <div class="event" data-start="16:30" data-end="17:00">
+      <div class="event-time">4:30 PM</div>
+      <div class="event-title">Initial Rehearsal</div>
+      <div class="event-desc">Conduct the initial rehearsal at Puay Chai.</div>
+    </div>
+
+  </div>
+
+  <!-- SUBANG PERFORMANCE -->
+
+  <div class="section-heading">
+    <div class="section-icon subang-icon">🎤</div>
+    <div>
+      <h2>SJK(C) SUBANG</h2>
+      <p>SECOND VISIT · FIRST PERFORMANCE</p>
+    </div>
+  </div>
+
+  <div class="timeline">
+
+    <div class="event" data-start="17:00" data-end="17:45">
+      <div class="event-time">5:00 – 5:15 PM</div>
+      <div class="event-title">Travel to Subang</div>
+      <div class="event-desc">Leave Puay Chai and head to SJK(C) Subang.</div>
+      <div class="event-tag">TRAVEL</div>
+    </div>
+
+    <div class="event" data-start="17:45" data-end="19:30">
+      <div class="event-time">5:45 PM</div>
+      <div class="event-title">Rehearsal at Subang</div>
+      <div class="event-desc">Prepare for the first performance.</div>
+    </div>
+
+    <div class="event" data-start="19:30" data-end="19:35">
+      <div class="event-time">7:30 PM</div>
+      <div class="event-title">PERFORMANCE TIME!</div>
+      <div class="event-desc">The first performance at SJK(C) Subang. Hopefully, no delay!</div>
+      <div class="event-tag">TARGET PERFORMANCE</div>
+    </div>
+
+    <div class="event" data-start="19:35" data-end="19:45">
+      <div class="event-time">7:35 PM</div>
+      <div class="event-title">Dismantle Tournament Display</div>
+      <div class="event-desc">Quickly dismantle and pack the tournament display.</div>
+      <div class="event-tag">10-MINUTE TRANSITION</div>
+    </div>
+
+  </div>
+
+  <!-- RETURN TO PUAY CHAI -->
+
+  <div class="section-heading">
+    <div class="section-icon return-icon">🚗</div>
+    <div>
+      <h2>BACK TO PUAY CHAI</h2>
+      <p>FINAL JOURNEY · SECOND PERFORMANCE</p>
+    </div>
+  </div>
+
+  <div class="timeline">
+
+    <div class="event" data-start="19:45" data-end="20:15">
+      <div class="event-time">7:45 PM</div>
+      <div class="event-title">Depart for Puay Chai</div>
+      <div class="event-desc">Leave Subang and travel back to Puay Chai.</div>
+      <div class="event-tag">TRAVEL</div>
+    </div>
+
+    <div class="event" data-start="20:15" data-end="21:45">
+      <div class="event-time">8:15 PM</div>
+      <div class="event-title">Expected Arrival</div>
+      <div class="event-desc">Target arrival at SJK(C) Puay Chai.</div>
+    </div>
+
+    <div class="event" data-start="21:45" data-end="22:30">
+      <div class="event-time">9:45 PM</div>
+      <div class="event-title">Earliest Possible Departure</div>
+      <div class="event-desc">Best-case scenario: hopefully able to leave Puay Chai by now!</div>
+      <div class="event-tag">BEST-CASE SCENARIO</div>
+    </div>
+
+    <div class="event" data-start="22:30" data-end="23:00">
+      <div class="event-time">10:30 – 11:00 PM</div>
+      <div class="event-title">Possible Late Departure</div>
+      <div class="event-desc">If the programme runs late, departure may only be possible around this time.</div>
+      <div class="event-tag">LATE FINISH</div>
+    </div>
+
+  </div>
+
+  <!-- IMPORTANT NOTES -->
+
+  <div class="warning">
+    <h3>⚠ CRITICAL TIMING REMINDERS</h3>
+    <p>⏱ <b>7:30 PM:</b> Subang performance must ideally start on time.</p>
+    <p>📦 <b>7:35 PM:</b> Only 10 minutes to dismantle and pack the tournament display.</p>
+    <p>🚗 <b>7:45 PM:</b> Target departure from Subang.</p>
+    <p>🌙 <b>9:45 – 11:00 PM:</b> Possible departure window from Puay Chai.</p>
+  </div>
+
+  <div class="footer">
+    COACH ANDREW · PERFORMANCE NIGHT 2026
+  </div>
+
+</div>
+
+<script>
+const events = [...document.querySelectorAll('.event')];
+
+function updateDashboard() {
+  const now = new Date();
+
+  document.getElementById('clock').textContent =
+    now.toLocaleTimeString('en-MY', {
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: true
+    });
+
+  document.getElementById('dateDisplay').textContent =
+    now.toLocaleDateString('en-MY', {
+      weekday: 'long',
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric'
+    });
+
+  // Schedule date: 14 November 2026
+  const target = new Date(2026, 10, 14);
+  const sameDay = now.toDateString() === target.toDateString();
+
+  events.forEach(event => {
+    event.classList.remove('active', 'next', 'done');
+  });
+
+  if (!sameDay) {
+    const before = now < target;
+
+    document.getElementById('currentActivity').textContent =
+      before ? 'Performance Night is coming!' : 'Performance Night completed';
+
+    document.getElementById('statusDescription').textContent =
+      before
+        ? 'Your schedule is ready for Saturday, 14 November 2026.'
+        : 'Your scheduled performance date has passed.';
+
+    return;
+  }
+
+  const minutes = now.getHours() * 60 + now.getMinutes();
+
+  const parsed = events.map(event => {
+    const [sh, sm] = event.dataset.start.split(':').map(Number);
+    const [eh, em] = event.dataset.end.split(':').map(Number);
+
+    return {
+      element: event,
+      start: sh * 60 + sm,
+      end: eh * 60 + em
+    };
+  });
+
+  const currentIndex = parsed.findIndex(
+    e => minutes >= e.start && minutes < e.end
+  );
+
+  const nextIndex = parsed.findIndex(e => minutes < e.start);
+
+  parsed.forEach((event, index) => {
+    if (event.end <= minutes) {
+      event.element.classList.add('done');
+    }
+
+    if (index === currentIndex) {
+      event.element.classList.add('active');
+    }
+
+    if (index === nextIndex) {
+      event.element.classList.add('next');
+    }
+  });
+
+  const title = events[currentIndex]?.querySelector('.event-title').textContent;
+
+  if (currentIndex !== -1) {
+    document.getElementById('currentActivity').textContent =
+      'NOW: ' + title;
+
+    document.getElementById('statusDescription').textContent =
+      nextIndex !== -1
+        ? 'Next: ' + events[nextIndex].querySelector('.event-title').textContent
+        : 'You are at the final scheduled activity.';
+  } else if (nextIndex !== -1) {
+    document.getElementById('currentActivity').textContent =
+      'UP NEXT: ' +
+      events[nextIndex].querySelector('.event-title').textContent;
+
+    document.getElementById('statusDescription').textContent =
+      'Your next scheduled activity is coming up.';
+  } else {
+    document.getElementById('currentActivity').textContent =
+      'All scheduled activities completed!';
+
+    document.getElementById('statusDescription').textContent =
+      'Time to finally head home. What a night!';
+  }
+}
+
+updateDashboard();
+setInterval(updateDashboard, 1000);
+</script>
+
+</body>
+</html>
