@@ -7,18 +7,54 @@
 <title>Performance Night | Coach Andrew</title>
 
 <style>
+
+/* =====================================================
+   EASY CUSTOMIZATION PANEL
+   CHANGE THESE VALUES TO CUSTOMIZE YOUR WEBSITE
+===================================================== */
+
 :root {
+
+  /* FONT SIZES */
+  --font-title: 40px;
+  --font-clock: 58px;
+  --font-section: 22px;
+  --font-event-title: 20px;
+  --font-event-time: 18px;
+  --font-description: 17px;
+  --font-status: 23px;
+  --font-small: 15px;
+  --font-tiny: 13px;
+
+  /* COLORS */
   --bg: #0b1020;
   --panel: #151d31;
   --panel2: #1b2740;
   --text: #f1f5ff;
-  --muted: #94a3b8;
+  --muted: #aab8cc;
   --blue: #3195ff;
   --red: #ff5268;
   --gold: #ffc857;
   --green: #38d99a;
   --line: #33415c;
+
+  /* SPACING */
+  --page-padding: 20px;
+  --card-padding: 20px;
+  --event-gap: 15px;
+  --section-gap: 32px;
+
+  /* ROUNDING */
+  --radius: 16px;
+  --small-radius: 10px;
+
+  /* LAYOUT */
+  --max-width: 800px;
 }
+
+/* =====================================================
+   GENERAL
+===================================================== */
 
 * {
   box-sizing: border-box;
@@ -29,108 +65,128 @@ body {
   background: var(--bg);
   color: var(--text);
   font-family: Arial, sans-serif;
-  padding: 24px 16px 50px;
+  padding: var(--page-padding);
 }
 
 .container {
-  max-width: 760px;
+  max-width: var(--max-width);
   margin: auto;
 }
 
+/* =====================================================
+   HEADER
+===================================================== */
+
 .header {
   text-align: center;
-  padding: 22px 10px 28px;
+  padding: 25px 10px 30px;
 }
 
 .eyebrow {
   color: var(--gold);
-  font-size: 12px;
+  font-size: var(--font-small);
   font-weight: bold;
   letter-spacing: 3px;
   text-transform: uppercase;
 }
 
 h1 {
-  font-size: clamp(25px, 6vw, 38px);
-  margin: 12px 0 8px;
+  font-size: var(--font-title);
+  margin: 14px 0 10px;
   font-weight: 900;
+  line-height: 1.15;
 }
 
 .subtitle {
   color: var(--muted);
-  font-size: 14px;
+  font-size: var(--font-small);
+  line-height: 1.5;
 }
+
+/* =====================================================
+   LIVE CLOCK
+===================================================== */
 
 .clock-card {
   background: linear-gradient(135deg, #1c3152, #172039);
   border: 1px solid #344d72;
-  border-radius: 18px;
-  padding: 23px;
+  border-radius: var(--radius);
+  padding: 25px 15px;
   text-align: center;
-  margin-bottom: 22px;
+  margin-bottom: 25px;
 }
 
 .clock-label {
   color: #a9c8ef;
-  font-size: 12px;
+  font-size: var(--font-tiny);
   letter-spacing: 2px;
   font-weight: bold;
 }
 
 #clock {
-  font-size: clamp(36px, 10vw, 54px);
+  font-size: var(--font-clock);
   font-weight: 900;
-  margin: 8px 0;
+  margin: 12px 0;
   font-variant-numeric: tabular-nums;
+  line-height: 1.1;
 }
 
 #dateDisplay {
   color: #b7c6dc;
-  font-size: 13px;
+  font-size: var(--font-small);
 }
+
+/* =====================================================
+   CURRENT STATUS
+===================================================== */
 
 .status-card {
   background: var(--panel);
   border: 1px solid var(--line);
-  border-radius: 14px;
-  padding: 18px;
-  margin-bottom: 30px;
+  border-radius: var(--radius);
+  padding: var(--card-padding);
+  margin-bottom: 35px;
 }
 
 .status-label {
   color: var(--gold);
-  font-size: 11px;
+  font-size: var(--font-tiny);
   font-weight: bold;
   letter-spacing: 2px;
-  margin-bottom: 9px;
+  margin-bottom: 12px;
 }
 
 #currentActivity {
-  font-size: 19px;
+  font-size: var(--font-status);
   font-weight: bold;
-  margin-bottom: 6px;
+  line-height: 1.3;
+  margin-bottom: 10px;
 }
 
 #statusDescription {
   color: var(--muted);
-  font-size: 13px;
-  line-height: 1.5;
+  font-size: var(--font-description);
+  line-height: 1.6;
 }
+
+/* =====================================================
+   SECTION HEADINGS
+===================================================== */
 
 .section-heading {
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin: 30px 0 16px;
+  gap: 14px;
+  margin: var(--section-gap) 0 20px;
 }
 
 .section-icon {
-  width: 38px;
-  height: 38px;
-  border-radius: 11px;
+  width: 46px;
+  height: 46px;
+  border-radius: var(--small-radius);
   display: grid;
   place-items: center;
-  font-size: 19px;
+  font-size: 23px;
   flex-shrink: 0;
 }
 
@@ -139,20 +195,24 @@ h1 {
 .return-icon { background: #4a3916; }
 
 .section-heading h2 {
-  font-size: 17px;
+  font-size: var(--font-section);
   margin: 0;
 }
 
 .section-heading p {
   color: var(--muted);
-  font-size: 11px;
-  margin: 4px 0 0;
+  font-size: var(--font-tiny);
+  margin: 6px 0 0;
 }
+
+/* =====================================================
+   TIMELINE
+===================================================== */
 
 .timeline {
   position: relative;
-  margin-left: 17px;
-  padding-left: 26px;
+  margin-left: 20px;
+  padding-left: 28px;
   border-left: 2px solid var(--line);
 }
 
@@ -160,19 +220,19 @@ h1 {
   position: relative;
   background: var(--panel);
   border: 1px solid #26344d;
-  border-radius: 13px;
-  padding: 16px;
-  margin-bottom: 13px;
+  border-radius: var(--radius);
+  padding: var(--card-padding);
+  margin-bottom: var(--event-gap);
   transition: border-color .2s, background .2s;
 }
 
 .event::before {
   content: "";
   position: absolute;
-  left: -34px;
-  top: 21px;
-  width: 13px;
-  height: 13px;
+  left: -37px;
+  top: 23px;
+  width: 15px;
+  height: 15px;
   border-radius: 50%;
   background: #64748b;
   border: 3px solid var(--bg);
@@ -202,32 +262,33 @@ h1 {
 
 .event-time {
   color: var(--gold);
-  font-size: 14px;
+  font-size: var(--font-event-time);
   font-weight: 800;
-  margin-bottom: 7px;
+  margin-bottom: 9px;
   font-variant-numeric: tabular-nums;
 }
 
 .event-title {
-  font-size: 16px;
+  font-size: var(--font-event-title);
   font-weight: bold;
-  margin-bottom: 6px;
+  line-height: 1.35;
+  margin-bottom: 8px;
 }
 
 .event-desc {
   color: var(--muted);
-  font-size: 13px;
-  line-height: 1.5;
+  font-size: var(--font-description);
+  line-height: 1.65;
 }
 
 .event-tag {
   display: inline-block;
-  font-size: 10px;
+  font-size: var(--font-tiny);
   font-weight: bold;
   letter-spacing: 1px;
-  margin-top: 10px;
-  padding: 5px 8px;
-  border-radius: 5px;
+  margin-top: 12px;
+  padding: 7px 10px;
+  border-radius: 6px;
   background: #26344d;
   color: #b9c9e2;
 }
@@ -242,66 +303,104 @@ h1 {
   color: #9bceff;
 }
 
+/* =====================================================
+   IMPORTANT REMINDERS
+===================================================== */
+
 .warning {
   background: #30271b;
   border: 1px solid #66502c;
-  border-radius: 13px;
-  padding: 17px;
-  margin-top: 25px;
+  border-radius: var(--radius);
+  padding: var(--card-padding);
+  margin-top: 30px;
 }
 
 .warning h3 {
   color: var(--gold);
-  font-size: 14px;
-  margin: 0 0 12px;
+  font-size: var(--font-event-title);
+  line-height: 1.4;
+  margin: 0 0 15px;
 }
 
 .warning p {
-  font-size: 13px;
-  color: #d4c7ae;
+  font-size: var(--font-description);
+  color: #e1d3bb;
   line-height: 1.6;
-  margin: 8px 0;
+  margin: 12px 0;
 }
+
+/* =====================================================
+   FOOTER
+===================================================== */
 
 .footer {
   text-align: center;
   color: #64748b;
-  font-size: 11px;
-  margin-top: 35px;
+  font-size: var(--font-tiny);
+  margin-top: 40px;
   letter-spacing: 1px;
 }
 
+/* =====================================================
+   MOBILE
+   Override only when screen is narrow
+===================================================== */
+
 @media (max-width: 480px) {
-  body {
-    padding: 12px 12px 35px;
+
+  :root {
+    --page-padding: 14px;
+    --card-padding: 17px;
+    --font-title: 32px;
+    --font-clock: 48px;
+    --font-section: 20px;
+    --font-event-title: 19px;
+    --font-event-time: 17px;
+    --font-description: 16px;
+    --font-status: 21px;
+    --font-small: 14px;
+    --font-tiny: 12px;
+    --event-gap: 13px;
+    --section-gap: 28px;
   }
 
   .header {
-    padding-top: 17px;
+    padding-top: 18px;
   }
 
-  .clock-card {
-    padding: 20px 12px;
+  .section-icon {
+    width: 42px;
+    height: 42px;
   }
 
-  .event {
-    padding: 14px;
+  .timeline {
+    margin-left: 15px;
+    padding-left: 25px;
   }
 
-  .event-title {
-    font-size: 15px;
+  .event::before {
+    left: -34px;
   }
+
 }
+
+/* =====================================================
+   END OF CUSTOMIZATION PANEL
+===================================================== */
+
 </style>
 </head>
 
 <body>
+
 <div class="container">
 
   <header class="header">
     <div class="eyebrow">Coach Andrew Presents</div>
     <h1>PERFORMANCE NIGHT</h1>
-    <div class="subtitle">Two Schools. Two Performances. One Busy Night.</div>
+    <div class="subtitle">
+      Two Schools. Two Performances. One Busy Night.
+    </div>
   </header>
 
   <div class="clock-card">
@@ -313,7 +412,9 @@ h1 {
   <div class="status-card">
     <div class="status-label">LIVE SCHEDULE STATUS</div>
     <div id="currentActivity">Getting ready...</div>
-    <div id="statusDescription">Your performance night timeline.</div>
+    <div id="statusDescription">
+      Your performance night timeline.
+    </div>
   </div>
 
   <!-- PUAY CHAI PREPARATION -->
@@ -331,25 +432,33 @@ h1 {
     <div class="event" data-start="15:00" data-end="15:30">
       <div class="event-time">3:00 PM</div>
       <div class="event-title">Travel to Puay Chai</div>
-      <div class="event-desc">Depart for SJK(C) Puay Chai.</div>
+      <div class="event-desc">
+        Depart for SJK(C) Puay Chai.
+      </div>
     </div>
 
     <div class="event" data-start="15:30" data-end="16:00">
       <div class="event-time">3:30 PM</div>
       <div class="event-title">Check Stage Markers</div>
-      <div class="event-desc">Inspect the markers on stage.</div>
+      <div class="event-desc">
+        Inspect the markers on stage.
+      </div>
     </div>
 
     <div class="event" data-start="16:00" data-end="16:30">
       <div class="event-time">4:00 PM</div>
       <div class="event-title">Brief TYY & STE</div>
-      <div class="event-desc">Explain and brief them on the swap arrangement.</div>
+      <div class="event-desc">
+        Explain and brief them on the swap arrangement.
+      </div>
     </div>
 
     <div class="event" data-start="16:30" data-end="17:00">
       <div class="event-time">4:30 PM</div>
       <div class="event-title">Initial Rehearsal</div>
-      <div class="event-desc">Conduct the initial rehearsal at Puay Chai.</div>
+      <div class="event-desc">
+        Conduct initial rehearsal at Puay Chai.
+      </div>
     </div>
 
   </div>
@@ -369,27 +478,36 @@ h1 {
     <div class="event" data-start="17:00" data-end="17:45">
       <div class="event-time">5:00 – 5:15 PM</div>
       <div class="event-title">Travel to Subang</div>
-      <div class="event-desc">Leave Puay Chai and head to SJK(C) Subang.</div>
+      <div class="event-desc">
+        Leave Puay Chai and head to SJK(C) Subang.
+      </div>
       <div class="event-tag">TRAVEL</div>
     </div>
 
     <div class="event" data-start="17:45" data-end="19:30">
       <div class="event-time">5:45 PM</div>
       <div class="event-title">Rehearsal at Subang</div>
-      <div class="event-desc">Prepare for the first performance.</div>
+      <div class="event-desc">
+        Prepare for the first performance.
+      </div>
     </div>
 
     <div class="event" data-start="19:30" data-end="19:35">
       <div class="event-time">7:30 PM</div>
       <div class="event-title">PERFORMANCE TIME!</div>
-      <div class="event-desc">The first performance at SJK(C) Subang. Hopefully, no delay!</div>
+      <div class="event-desc">
+        The first performance at SJK(C) Subang.
+        Hopefully, no delay!
+      </div>
       <div class="event-tag">TARGET PERFORMANCE</div>
     </div>
 
     <div class="event" data-start="19:35" data-end="19:45">
       <div class="event-time">7:35 PM</div>
       <div class="event-title">Dismantle Tournament Display</div>
-      <div class="event-desc">Quickly dismantle and pack the tournament display.</div>
+      <div class="event-desc">
+        Quickly dismantle and pack the tournament display.
+      </div>
       <div class="event-tag">10-MINUTE TRANSITION</div>
     </div>
 
@@ -410,27 +528,35 @@ h1 {
     <div class="event" data-start="19:45" data-end="20:15">
       <div class="event-time">7:45 PM</div>
       <div class="event-title">Depart for Puay Chai</div>
-      <div class="event-desc">Leave Subang and travel back to Puay Chai.</div>
+      <div class="event-desc">
+        Leave Subang and travel back to Puay Chai.
+      </div>
       <div class="event-tag">TRAVEL</div>
     </div>
 
     <div class="event" data-start="20:15" data-end="21:45">
       <div class="event-time">8:15 PM</div>
       <div class="event-title">Expected Arrival</div>
-      <div class="event-desc">Target arrival at SJK(C) Puay Chai.</div>
+      <div class="event-desc">
+        Target arrival at SJK(C) Puay Chai.
+      </div>
     </div>
 
     <div class="event" data-start="21:45" data-end="22:30">
       <div class="event-time">9:45 PM</div>
       <div class="event-title">Earliest Possible Departure</div>
-      <div class="event-desc">Best-case scenario: hopefully able to leave Puay Chai by now!</div>
+      <div class="event-desc">
+        Best-case scenario: hopefully able to leave Puay Chai by now!
+      </div>
       <div class="event-tag">BEST-CASE SCENARIO</div>
     </div>
 
     <div class="event" data-start="22:30" data-end="23:00">
       <div class="event-time">10:30 – 11:00 PM</div>
       <div class="event-title">Possible Late Departure</div>
-      <div class="event-desc">If the programme runs late, departure may only be possible around this time.</div>
+      <div class="event-desc">
+        If the programme runs late, departure may only be possible around this time.
+      </div>
       <div class="event-tag">LATE FINISH</div>
     </div>
 
@@ -453,9 +579,11 @@ h1 {
 </div>
 
 <script>
+
 const events = [...document.querySelectorAll('.event')];
 
 function updateDashboard() {
+
   const now = new Date();
 
   document.getElementById('clock').textContent =
@@ -474,7 +602,7 @@ function updateDashboard() {
       year: 'numeric'
     });
 
-  // Schedule date: 14 November 2026
+  // Performance date: 14 November 2026
   const target = new Date(2026, 10, 14);
   const sameDay = now.toDateString() === target.toDateString();
 
@@ -483,10 +611,13 @@ function updateDashboard() {
   });
 
   if (!sameDay) {
+
     const before = now < target;
 
     document.getElementById('currentActivity').textContent =
-      before ? 'Performance Night is coming!' : 'Performance Night completed';
+      before
+        ? 'Performance Night is coming!'
+        : 'Performance Night completed';
 
     document.getElementById('statusDescription').textContent =
       before
@@ -499,6 +630,7 @@ function updateDashboard() {
   const minutes = now.getHours() * 60 + now.getMinutes();
 
   const parsed = events.map(event => {
+
     const [sh, sm] = event.dataset.start.split(':').map(Number);
     const [eh, em] = event.dataset.end.split(':').map(Number);
 
@@ -507,15 +639,19 @@ function updateDashboard() {
       start: sh * 60 + sm,
       end: eh * 60 + em
     };
+
   });
 
   const currentIndex = parsed.findIndex(
     e => minutes >= e.start && minutes < e.end
   );
 
-  const nextIndex = parsed.findIndex(e => minutes < e.start);
+  const nextIndex = parsed.findIndex(
+    e => minutes < e.start
+  );
 
   parsed.forEach((event, index) => {
+
     if (event.end <= minutes) {
       event.element.classList.add('done');
     }
@@ -527,36 +663,44 @@ function updateDashboard() {
     if (index === nextIndex) {
       event.element.classList.add('next');
     }
+
   });
 
-  const title = events[currentIndex]?.querySelector('.event-title').textContent;
-
   if (currentIndex !== -1) {
+
     document.getElementById('currentActivity').textContent =
-      'NOW: ' + title;
+      'NOW: ' +
+      events[currentIndex].querySelector('.event-title').textContent;
 
     document.getElementById('statusDescription').textContent =
       nextIndex !== -1
         ? 'Next: ' + events[nextIndex].querySelector('.event-title').textContent
         : 'You are at the final scheduled activity.';
+
   } else if (nextIndex !== -1) {
+
     document.getElementById('currentActivity').textContent =
       'UP NEXT: ' +
       events[nextIndex].querySelector('.event-title').textContent;
 
     document.getElementById('statusDescription').textContent =
       'Your next scheduled activity is coming up.';
+
   } else {
+
     document.getElementById('currentActivity').textContent =
       'All scheduled activities completed!';
 
     document.getElementById('statusDescription').textContent =
       'Time to finally head home. What a night!';
+
   }
+
 }
 
 updateDashboard();
 setInterval(updateDashboard, 1000);
+
 </script>
 
 </body>
